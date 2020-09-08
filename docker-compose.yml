@@ -1,0 +1,26 @@
+version: '2'
+services: 
+  php:
+    build: 
+      context: .
+    image: php:1.0
+    depends_on: 
+      - mysql
+      - redis
+    ports: 
+      - '81:80'
+  mysql:
+    image: mysql:5.7
+    container_name: mysql-db
+    environment: 
+      MYSQL_ROOT_PASSWORD: tel4vn
+      MYSQL_DATABASE: tel4vn
+      MYSQL_USER: tel4vn
+      MYSQL_PASSWORD: tel4vn
+    volumes: 
+      - db_php:/var/lib/mysql
+  redis:
+    image: redis
+    container_name: redis-db
+volumes:
+  db_php:
